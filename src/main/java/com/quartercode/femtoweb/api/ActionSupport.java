@@ -96,6 +96,24 @@ public abstract class ActionSupport implements Action {
     }
 
     /**
+     * Returns whether the {@link #request} parameter with the given name is set.
+     * For example, say that the current request URI is {@code .../search?query=test}.
+     * A call to this method with the parameter name {@code query} would yield to {@code true}.
+     * However, a call with the parameter name {@code user} would return {@code false} because there's no such parameter in the request.
+     * Of course, this method also supports access to {@code POST} parameters.<br>
+     * <br>
+     * Internally, this method just redirects all calls to {@link HttpServletRequest#getParameter(String)} and checks whether the result is {@code null}.
+     * See that method for further documentation.
+     *
+     * @param name The name of the request parameter whose existence should be checked.
+     * @return Whether the request parameter with the given name is part of the request.
+     */
+    protected final boolean isParamSet(String name) {
+
+        return request.getParameter(name) != null;
+    }
+
+    /**
      * Pushes the given key-value-pair to the {@link #request} attributes so JSPs that follow this action can use it.
      * For example, say that we push the integer attribute {@code price} with the value {@code 50}.
      * Any JSP following this very action could then access that price attribute using a variety of different ways
