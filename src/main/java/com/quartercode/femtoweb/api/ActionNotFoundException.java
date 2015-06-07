@@ -30,7 +30,7 @@ public class ActionNotFoundException extends Exception {
 
     /**
      * Creates a new action not found exception.
-     * 
+     *
      * @param cause The exception which caused the error in the first place.
      * @param uri The URI no action is mapped to.
      * @param actionFQCN The fully qualified class name the algorithm expected the {@link Action} class for the given URI to be located under.
@@ -45,7 +45,7 @@ public class ActionNotFoundException extends Exception {
 
     /**
      * Returns the URI no action is mapped to.
-     * 
+     *
      * @return The unmapped URI.
      */
     public String getUri() {
@@ -56,7 +56,7 @@ public class ActionNotFoundException extends Exception {
     /**
      * Returns the fully qualified class name the algorithm expected the {@link Action} class for the set {@link #getUri() URI} to be located under.
      * For example, this might be {@code test.package.SomeTestAction} if the URI is {@code /test/package/someTest}
-     * 
+     *
      * @return The expected (but not existent) action class for the set URI.
      */
     public String getActionFQCN() {

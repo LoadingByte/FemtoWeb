@@ -29,7 +29,7 @@ public interface Context {
      * By default, this framework setting is {@code /static}.<br>
      * <br>
      * Note that this path always starts with {@code /} and never ands with {@code /}.
-     * 
+     *
      * @return The static resource path.
      */
     public String getStaticAssetPath();
@@ -40,7 +40,7 @@ public interface Context {
      * By default, this framework setting is {@code /WEB-INF/dynamic}.<br>
      * <br>
      * Note that this path always starts with {@code /} and never ands with {@code /}.
-     * 
+     *
      * @return The dynamic resource path.
      */
     public String getDynamicAssetPath();
@@ -51,7 +51,7 @@ public interface Context {
      * By default, this framework setting is {@code /index}.<br>
      * <br>
      * Note that this URI always starts with {@code /} and never ands with {@code /}.
-     * 
+     *
      * @return The URI to the homepage.
      */
     public String getIndexUri();
@@ -62,7 +62,7 @@ public interface Context {
      * See the {@link Action} javadoc for more details on the algorithm behind the mapping.<br>
      * <br>
      * Note that the returned URI always starts with {@code /} and never ands with {@code /}.
-     * 
+     *
      * @param action The action class whose URI should be returned.
      * @return The URI the given action class is mapped to.
      */
@@ -72,7 +72,7 @@ public interface Context {
      * Returns the {@link Action} class which is mapped to the given URI.
      * That is possible because each action is automatically mapped to a certain URI (e.g {@code test.package.SomeTestAction -> /test/package/someTest}).
      * See the {@link Action} javadoc for more details on the algorithm behind the mapping.
-     * 
+     *
      * @param uri The URI whose mapped action class should be returned.
      * @return The action class which is mapped to the given URI.
      * @throws ActionNotFoundException If no action class is mapped to the given URI.

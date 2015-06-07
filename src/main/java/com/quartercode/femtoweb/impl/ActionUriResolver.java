@@ -32,7 +32,7 @@ class ActionUriResolver {
     /**
      * Returns the URI of the given {@link Action} which must be located in the given package.
      * See {@link Context#getUri(Class)} for more information.
-     * 
+     *
      * @param actionBasePackage The package name which will be removed from the start of the action class name.
      *        Thereby, package names like {@code com.quartercode.femtowebtest.actions} are not included in URIs.
      * @param action The action class whose URI should be returned.
@@ -69,7 +69,7 @@ class ActionUriResolver {
     /**
      * Returns the {@link Action} which is mapped to the given URI and located in the given package or a subpackage.
      * See {@link Context#getAction(String)} for more information.
-     * 
+     *
      * @param actionBasePackage The name of the package the action class must be located in somehow (subpackages are allowed).
      *        For example, the URI {@code /some/test} and the package {@code com.quartercode.femtowebtest.actions} would result in the
      *        class name {@code com.quartercode.femtowebtest.actions.some.TestAction}.

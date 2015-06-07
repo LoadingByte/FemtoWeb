@@ -38,7 +38,7 @@ import com.quartercode.femtoweb.util.RequestUtils;
  * Therefore, all {@link ServletRequest#setAttribute(String, Object) request attributes}, {@link HttpSession#setAttribute(String, Object) session attributes} etc.
  * are also forwarded to the resource.
  * If the forwarding target is a JSP page, that page can then access those attributes (e.g. through the expression language).
- * 
+ *
  * @see Action
  */
 public class View implements Action {
@@ -54,7 +54,7 @@ public class View implements Action {
     /**
      * Creates a new view action which displays the dynamic resource located under the given path.
      * Note that the path is relative to the {@link Context#getDynamicAssetPath() dynamic asset path}.
-     * 
+     *
      * @param path The path to the resource which should be displayed to the user.
      */
     public View(String path) {
@@ -75,7 +75,7 @@ public class View implements Action {
      * dynamic resource path {@code /test/package/testForm.jsp}.<br>
      * <br>
      * Note that the final path is relative to the {@link Context#getDynamicAssetPath() dynamic asset path}.
-     * 
+     *
      * @param dir The action class whose URI "directory" should be used as the directory of the final file path.
      * @param name The name of the viewed file in the directory defined by the given action class.
      */

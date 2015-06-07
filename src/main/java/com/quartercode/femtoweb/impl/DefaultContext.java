@@ -46,7 +46,7 @@ public class DefaultContext implements Context {
 
     /**
      * Creates a new default context implementation with the given framework settings.
-     * 
+     *
      * @param actionBasePackage The package which contains all {@link Action}s and action subpackages.
      *        Note that this also functions as a package prefix which is removed from all action packages before they are mapped to URIs.
      *        Thereby, package names like {@code com.quartercode.femtowebtest.actions} are not included in URIs.

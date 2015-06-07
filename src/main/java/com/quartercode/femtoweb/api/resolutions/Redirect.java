@@ -32,7 +32,7 @@ import com.quartercode.femtoweb.util.RequestUtils;
 /**
  * An {@link Action} which redirects the user's browser to another URI using HTTP 302 and executes no further actions.
  * Therefore, all request attributes and parameters will be disposed.
- * 
+ *
  * @see Action
  */
 public class Redirect implements Action {
@@ -50,7 +50,7 @@ public class Redirect implements Action {
      * See {@link HttpServletResponse#sendRedirect(String)} for more details on the format the URL must have.
      * Actually, this method is only recommended for redirecting to another website (e.g. {@code http://quartercode.com}).
      * For redirecting to another action, you should use the {@link #Redirect(Class, String...)} constructor.
-     * 
+     *
      * @param url The URL the user should be redirected to.
      *        See {@link HttpServletResponse#sendRedirect(String)} for more details on the format.
      * @param parameters An alternating array of GET parameter names and values that should be appended to the URL.
@@ -73,7 +73,7 @@ public class Redirect implements Action {
      * Creates a new redirect action which redirects the user to the given {@link Action}.
      * Internally, the user is redirected to the URI the action is mapped to.
      * See the {@link Action} javadoc for more details on that URI mapping.
-     * 
+     *
      * @param action The action the user should be redirected to.
      * @param parameters An alternating array of GET parameter names and values that should be appended to the URI of the action.
      *        For example, the array {@code [param1, value1, param2, value2]} would result in the URI {@code ...?param1=value1&param2=value2}.

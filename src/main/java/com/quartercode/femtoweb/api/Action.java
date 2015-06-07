@@ -35,7 +35,7 @@ import com.quartercode.femtoweb.api.resolutions.View;
  * Note that a new action instance is created for each request.
  * Therefore, the action is allowed to carry state information in variables outside the {@link #execute(HttpServletRequest, HttpServletResponse, Context)} method.
  * Also note that all action implementations <b>must</b> fulfill the following requirements:
- * 
+ *
  * <ul>
  * <li>All actions must provide a default no-arg constructor.</li>
  * <li>All actions must end with {@code Action} (example: {@code SomeTestAction} is allowed, while {@code SomeTest} is disallowed).</li>
@@ -49,12 +49,12 @@ public interface Action {
      * Fulfills the given HTTP request.
      * The returned action will be executed directly after this method finished in order to continue the fulfillment of the request.
      * In the most common case, a {@link View} action is returned in order to show a JSP page to the user.
-     * 
+     *
      * @param request The {@link HttpServletRequest} object representing the processed request.
      * @param response The {@link HttpServletResponse} object representing the response to the processed request.
-     * @param context A {@link Context} object which provides some framework settings and methods which depend on those settings.
+     * @param context A {@link Context} object which provides some framework settings, as well as some methods which depend on those settings.
      * @return The next action which should be executed directly after this method finished.
-     * @throws Exception If any exception occurred while the action executed its activities.
+     * @throws Exception If any exception occurred while this action executed its activities.
      */
     public Action execute(HttpServletRequest request, HttpServletResponse response, Context context) throws Exception;
 
