@@ -79,8 +79,8 @@ public abstract class ActionSupport implements Action {
     // ----- Utilities -----
 
     /**
-     * Retrieves the {@link #request} parameter ({@code GET} or {@code POST}) that has the given name.
-     * For example, say that the current request URL is {@code .../search?query=test}.
+     * Retrieves the {@link #request} parameter that has the given name.
+     * For example, say that the current request URI is {@code .../search?query=test}.
      * A call to this method with the parameter name {@code query} would yield to the parameter value {@code test}.
      * Of course, this method also supports access to {@code POST} parameters.<br>
      * <br>
