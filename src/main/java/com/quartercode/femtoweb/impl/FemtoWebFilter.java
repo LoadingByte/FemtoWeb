@@ -72,7 +72,7 @@ public class FemtoWebFilter implements Filter {
 
         // If no specific action is specified (empty URI, e.g. "/"), redirect to the index URI (by default "/index")
         if (StringUtils.remove(uri, '/').isEmpty()) {
-            response.sendRedirect(RequestUtils.getContextPath(request) + context.getIndexUri());
+            response.sendRedirect(request.getContextPath() + context.getIndexUri());
             return;
         }
 

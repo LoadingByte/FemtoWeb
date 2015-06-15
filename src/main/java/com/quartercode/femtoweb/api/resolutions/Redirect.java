@@ -99,7 +99,7 @@ public class Redirect implements Action {
         if (url != null) {
             actualUrl = url;
         } else {
-            actualUrl = RequestUtils.getContextPath(request) + context.getUri(action);
+            actualUrl = request.getContextPath() + context.getUri(action);
         }
 
         // Add GET parameters to the URL (if any)

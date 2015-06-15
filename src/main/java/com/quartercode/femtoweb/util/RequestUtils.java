@@ -27,20 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 public class RequestUtils {
 
     /**
-     * Returns the {@link HttpServletRequest#getContextPath() context path} of the given {@link HttpServletRequest}.
-     * In contrast to the regular method, this method returns {@code "/"} instead of {@code ""} if the context path is the root of the server.
-     * That means that the returned path <b>always</b> starts with {@code /} (and never ends with {@code /}).
-     *
-     * @param request The request whose context path should be returned.
-     * @return The context path of the given request.
-     *         It always starts with {@code /} and never ends with {@code /}.
-     */
-    public static String getContextPath(HttpServletRequest request) {
-
-        return request.getContextPath().isEmpty() ? "/" : request.getContextPath();
-    }
-
-    /**
      * Returns the {@link HttpServletRequest#getRequestURI() URI} of the given {@link HttpServletRequest} without the {@link HttpServletRequest#getContextPath() context path}.
      * Nevertheless, the returned URI still always starts with {@code /}.
      *
@@ -49,7 +35,7 @@ public class RequestUtils {
      */
     public static String getRequestUri(HttpServletRequest request) {
 
-        return request.getRequestURI().substring(getContextPath(request).length());
+        return request.getRequestURI().substring(request.getContextPath().length());
     }
 
     private RequestUtils() {
