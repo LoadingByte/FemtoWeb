@@ -18,8 +18,12 @@
 
 package com.quartercode.femtoweb.api;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang3.ArrayUtils;
 import com.quartercode.femtoweb.api.resolutions.View;
 
 /**
@@ -93,6 +97,28 @@ public abstract class ActionSupport implements Action {
     protected final String getParam(String name) {
 
         return request.getParameter(name);
+    }
+
+    /**
+     * Retrieves <b>all</b> the {@link #request} parameters that have the given name.
+     * For example, say that the current request URI is {@code .../search?filter=red&filter=green} (e.g. because multiple checkboxes have the same name).
+     * A call to this method with the parameter name {@code filter} would yield to the parameter value list {@code [red, green]}.
+     * Of course, this method also supports access to {@code POST} parameters.<br>
+     * Note that this method returns an empty list instead of a {@code null} object if the retrieved parameter doesn't actually exist for.
+     * That change has been made for additional convenience.<br>
+     * <br>
+     * Internally, this method just redirects all calls to {@link HttpServletRequest#getParameterValues(String)}.
+     * See that method for further documentation.
+     *
+     * @param name The name of the request parameter whose values should be returned.
+     * @return All the values of the retrieved request parameter.
+     */
+    protected final List<String> getParams(String name) {
+
+        String[] params = request.getParameterValues(name);
+        // Sadly, this rather memory intensive implementation (we always need to create a new array list) is necessary since
+        // Collections.emptyList() and Arrays.asList() return private classes which are not properly supported by EL
+        return ArrayUtils.isEmpty(params) ? new ArrayList<String>() : new ArrayList<>(Arrays.asList(params));
     }
 
     /**
