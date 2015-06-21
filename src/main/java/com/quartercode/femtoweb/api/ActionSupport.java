@@ -156,4 +156,55 @@ public abstract class ActionSupport implements Action {
         request.setAttribute(name, value);
     }
 
+    /**
+     * {@link #push(String, Object) Pushes} the given {@link #getParam(String) single parameter value} if it {@link #isParamSet(String) is set}.
+     * For example, say that we have a form which looks like this:
+     *
+     * <pre>
+     * &lt;form&gt; &lt;!-- The form sends its data to itself when you click submit --&gt;
+     *     &lt;input type="text" name="query" /&gt;
+     *     &lt;!-- Submit button ... --&gt;
+     * &lt;/form&gt;
+     * </pre>
+     *
+     * If you click the submit button, the action that backs the JSP could retrieve and process the query parameter.
+     * However, when the JSP is displayed again, the input field depicted above would no longer contain the text input by the user.
+     * In order to fix that, the action could always repush the parameter {@code query} so that the value can be reused by the input:
+     *
+     * <pre>
+     * &lt;form&gt;
+     *     &lt;input type="text" name="query" <b>value="${query}"</b> /&gt;
+     *     &lt;!-- Submit button ... --&gt;
+     * &lt;/form&gt;
+     * </pre>
+     *
+     * @param name The name of the parameter whose value should be retrieved and then immediately pushed again.
+     */
+    protected final void repushSingle(String name) {
+
+        String param = getParam(name);
+
+        if (param != null) {
+            push(name, param);
+        }
+    }
+
+    /**
+     * {@link #push(String, Object) Pushes} the {@link #getParams(String) all values of the given parameter} as a list if it {@link #isParamSet(String) is set}.
+     * If you wonder what this could be useful for, take a look at {@link #repushSingle(String)}.
+     * The JavaDoc of that method discusses repushing a single parameter value.
+     * Of course, the JSP processing of a multiple parameter value is slightly more complicated.
+     * Still, it could be used for preserving the state of checkboxes or other multiple choice inputs.
+     *
+     * @param name The name of the parameter whose multiple values should be retrieved and then immediately pushed again as a list.
+     */
+    protected final void repushMultiple(String name) {
+
+        List<String> params = getParams(name);
+
+        if (!params.isEmpty()) {
+            push(name, params);
+        }
+    }
+
 }
