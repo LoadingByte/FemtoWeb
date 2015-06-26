@@ -23,10 +23,29 @@ package com.quartercode.femtoweb.api;
  */
 public class ActionNotFoundException extends Exception {
 
-    private static final long serialVersionUID = 3067738731599265496L;
+    private static final long serialVersionUID = -167846068190638844L;
 
-    private final String      uri;
-    private final String      actionFQCN;
+    private static String createMessage(String uri, String actionFQCN) {
+
+        return "Cannot find action '" + actionFQCN + "' for request to '" + uri + "'";
+    }
+
+    private final String uri;
+    private final String actionFQCN;
+
+    /**
+     * Creates a new action not found exception.
+     *
+     * @param uri The URI no action is mapped to.
+     * @param actionFQCN The fully qualified class name the algorithm expected the {@link Action} class for the given URI to be located under.
+     */
+    public ActionNotFoundException(String uri, String actionFQCN) {
+
+        super(createMessage(uri, actionFQCN));
+
+        this.uri = uri;
+        this.actionFQCN = actionFQCN;
+    }
 
     /**
      * Creates a new action not found exception.
@@ -37,7 +56,7 @@ public class ActionNotFoundException extends Exception {
      */
     public ActionNotFoundException(Throwable cause, String uri, String actionFQCN) {
 
-        super("Cannot find action '" + actionFQCN + "' for request to '" + uri + "'", cause);
+        super(createMessage(uri, actionFQCN), cause);
 
         this.uri = uri;
         this.actionFQCN = actionFQCN;

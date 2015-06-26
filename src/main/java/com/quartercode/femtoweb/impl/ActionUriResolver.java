@@ -23,6 +23,7 @@ import org.apache.commons.lang3.Validate;
 import com.quartercode.femtoweb.api.Action;
 import com.quartercode.femtoweb.api.ActionNotFoundException;
 import com.quartercode.femtoweb.api.Context;
+import com.quartercode.femtoweb.api.IgnoreAction;
 
 /**
  * An internal class used by {@link DefaultContext} for enforcing the mapping of {@link Action}s to URIs.
@@ -91,7 +92,13 @@ class ActionUriResolver {
         String actionFQCN = joinNonBlankItems(".", actionBasePackage, actionFQCNPackage, actionFQCNName);
 
         try {
-            return (Class<? extends Action>) Class.forName(actionFQCN);
+            Class<?> c = Class.forName(actionFQCN);
+
+            if (!Action.class.isAssignableFrom(c) || c.isAnnotationPresent(IgnoreAction.class)) {
+                throw new ActionNotFoundException(uri, actionFQCN);
+            } else {
+                return (Class<? extends Action>) c;
+            }
         } catch (ClassNotFoundException e) {
             throw new ActionNotFoundException(e, uri, actionFQCN);
         }
