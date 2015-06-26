@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.ArrayUtils;
 import com.quartercode.femtoweb.api.resolutions.View;
 
@@ -51,6 +52,11 @@ public abstract class ActionSupport implements Action {
     protected HttpServletRequest  request;
 
     /**
+     * The current {@link HttpSession} associated with the {@link #request currently processed request}.
+     */
+    protected HttpSession         session;
+
+    /**
      * The {@link HttpServletResponse} object representing the response to the {@link #request currently processed request}.
      */
     protected HttpServletResponse response;
@@ -64,6 +70,7 @@ public abstract class ActionSupport implements Action {
     public final Action execute(HttpServletRequest request, HttpServletResponse response, Context context) throws Exception {
 
         this.request = request;
+        session = request.getSession();
         this.response = response;
         this.context = context;
 
