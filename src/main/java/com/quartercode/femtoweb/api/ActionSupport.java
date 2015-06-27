@@ -52,11 +52,6 @@ public abstract class ActionSupport implements Action {
     protected HttpServletRequest  request;
 
     /**
-     * The current {@link HttpSession} associated with the {@link #request currently processed request}.
-     */
-    protected HttpSession         session;
-
-    /**
      * The {@link HttpServletResponse} object representing the response to the {@link #request currently processed request}.
      */
     protected HttpServletResponse response;
@@ -70,7 +65,6 @@ public abstract class ActionSupport implements Action {
     public final Action execute(HttpServletRequest request, HttpServletResponse response, Context context) throws Exception {
 
         this.request = request;
-        session = request.getSession();
         this.response = response;
         this.context = context;
 
@@ -212,6 +206,32 @@ public abstract class ActionSupport implements Action {
         if (!params.isEmpty()) {
             push(name, params);
         }
+    }
+
+    /**
+     * Returns the object which is assigned to the given name in the {@link #request currently processed request's} {@link HttpSession session}.
+     * This method might return {@code null} if no object is assigned to the name, or if no session has yet been created in the first place.
+     *
+     * @param name The name of the session object which should be returned.
+     * @return The session object with the given name.
+     */
+    protected final Object getSessionAttr(String name) {
+
+        HttpSession session = request.getSession(false);
+        return session == null ? null : session.getAttribute(name);
+    }
+
+    /**
+     * Assigns the given object to the given name in the {@link #request currently processed request's} {@link HttpSession session}.
+     * If another object is already assigned to the same name, the old object is replaced with the given new one.
+     * That also means that a session attribute can be {@link HttpSession#removeAttribute(String) removed} by just passing a {@code null} value into this method.
+     *
+     * @param name The name the given object should be assigned to.
+     * @param value The object which should be assigned to the given name.
+     */
+    protected final void setSessionAttr(String name, Object value) {
+
+        request.getSession().setAttribute(name, value);
     }
 
 }
