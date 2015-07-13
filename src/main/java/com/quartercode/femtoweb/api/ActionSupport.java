@@ -86,7 +86,7 @@ public abstract class ActionSupport implements Action {
     /**
      * Retrieves the {@link #request} parameter that has the given name.
      * For example, say that the current request URI is {@code .../search?query=test}.
-     * A call to this method with the parameter name {@code query} would yield to the parameter value {@code test}.
+     * A call to this method with the parameter name {@code query} would yield the parameter value {@code test}.
      * Of course, this method also supports access to {@code POST} parameters.<br>
      * <br>
      * Internally, this method just redirects all calls to {@link HttpServletRequest#getParameter(String)}.
@@ -103,9 +103,9 @@ public abstract class ActionSupport implements Action {
     /**
      * Retrieves <b>all</b> the {@link #request} parameters that have the given name.
      * For example, say that the current request URI is {@code .../search?filter=red&filter=green} (e.g. because multiple checkboxes have the same name).
-     * A call to this method with the parameter name {@code filter} would yield to the parameter value list {@code [red, green]}.
+     * A call to this method with the parameter name {@code filter} would yield the parameter value list {@code ["red", "green"]}.
      * Of course, this method also supports access to {@code POST} parameters.<br>
-     * Note that this method returns an empty list instead of a {@code null} object if the retrieved parameter doesn't actually exist for.
+     * Note that this method returns an empty list instead of {@code null} if the retrieved parameter doesn't actually exist.
      * That change has been made for additional convenience.<br>
      * <br>
      * Internally, this method just redirects all calls to {@link HttpServletRequest#getParameterValues(String)}.
@@ -123,11 +123,11 @@ public abstract class ActionSupport implements Action {
     }
 
     /**
-     * Returns whether the {@link #request} parameter with the given name is set.
+     * Returns whether the {@link #request} parameter with the given name exists.
      * For example, say that the current request URI is {@code .../search?query=test}.
-     * A call to this method with the parameter name {@code query} would yield to {@code true}.
+     * A call to this method with the parameter name {@code query} would yield {@code true}.
      * However, a call with the parameter name {@code user} would return {@code false} because there's no such parameter in the request.
-     * Of course, this method also supports access to {@code POST} parameters.<br>
+     * Of course, this method also supports {@code POST} parameters.<br>
      * <br>
      * Internally, this method just redirects all calls to {@link HttpServletRequest#getParameter(String)} and checks whether the result is {@code null}.
      * See that method for further documentation.
@@ -169,7 +169,7 @@ public abstract class ActionSupport implements Action {
      * </pre>
      *
      * If you click the submit button, the action that backs the JSP could retrieve and process the query parameter.
-     * However, when the JSP is displayed again, the input field depicted above would no longer contain the text input by the user.
+     * However, when the JSP is displayed again (e.g. because form validation failed), the input field depicted above would no longer contain the text input by the user.
      * In order to fix that, the action could always repush the parameter {@code query} so that the value can be reused by the input:
      *
      * <pre>
@@ -191,10 +191,10 @@ public abstract class ActionSupport implements Action {
     }
 
     /**
-     * {@link #push(String, Object) Pushes} the {@link #getParams(String) all values of the given parameter} as a list if it {@link #isParamSet(String) is set}.
+     * {@link #push(String, Object) Pushes} {@link #getParams(String) all values of the given parameter} as a list if it {@link #isParamSet(String) is set}.
      * If you wonder what this could be useful for, take a look at {@link #repushSingle(String)}.
      * The JavaDoc of that method discusses repushing a single parameter value.
-     * Of course, the JSP processing of a multiple parameter value is slightly more complicated.
+     * Of course, the JSP code for processing of a multiple parameter value is slightly more complicated.
      * Still, it could be used for preserving the state of checkboxes or other multiple choice inputs.
      *
      * @param name The name of the parameter whose multiple values should be retrieved and then immediately pushed again as a list.
